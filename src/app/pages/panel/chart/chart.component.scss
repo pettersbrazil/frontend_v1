@@ -1,0 +1,33 @@
+#charts {
+    padding-left: 20px;
+
+    .line-vertical {
+        border-left: 5px solid #08c49f;
+    }
+
+    .chart-detail {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        color: #8078b3;
+
+        h2 {
+            color: #08c49f;
+            font-size: 48px;
+
+            small {
+                color: #8078b3;
+                font-size: 14px;
+                display: block;
+            }
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .lh {
+            margin-bottom: 0;
+        }
+    }
+}

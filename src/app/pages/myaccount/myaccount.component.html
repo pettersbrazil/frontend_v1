@@ -1,0 +1,93 @@
+<section id="myaccount" class="row">
+
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+    ></app-alert>
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+
+    <div class="col-12 col-lg-6">
+        <mdb-tabs>
+            <mdb-tab title="Usuário">
+                <form id="userForm" [formGroup]="userForm" (keyup.enter)="saveUser()" class="row">
+                    <div class="col-12 mb-3">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="name" type="text" id="name" class="form-control"/>
+                            <label mdbLabel class="form-label" for="name">Nome</label>
+                        </mdb-form-control>
+                    </div>
+                    <div *ngIf="!admin" class="col-12 mb-3">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="phone" type="text" id="phone" class="form-control" mask="(00) 00000-0000"/>
+                            <label mdbLabel class="form-label" for="phone">Telefone</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="email" type="email" id="email" class="form-control"/>
+                            <label mdbLabel class="form-label" for="email">E-mail</label>
+                        </mdb-form-control>
+                    </div>
+                    <div aria-colcount="col mb-4">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            [disabled]="userForm.invalid"
+                            (click)="saveUser()"
+                        >alterar</button>
+                    </div>
+                </form>
+            </mdb-tab>
+
+            <mdb-tab title="Senha">
+                <form id="passwordForm" [formGroup]="passwordForm" (keyup.enter)="savePassword()" class="row">
+                    <div class="col-12 col-lg-4 mb-3">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="password" type="password" id="password" class="form-control"/>
+                            <label mdbLabel class="form-label" for="password">Senha atual</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="col-12 col-lg-4 mb-3">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="newPassword" type="password" id="newPassword" class="form-control"/>
+                            <label mdbLabel class="form-label" for="newPassword">Nova senha</label>
+                        </mdb-form-control>
+                    </div>
+                    <div class="col-12 col-lg-4 mb-3">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="newPasswordConfirm" type="password" id="newPasswordConfirm" class="form-control"/>
+                            <label mdbLabel class="form-label" for="newPasswordConfirm">Confirmar senha</label>
+                        </mdb-form-control>
+                    </div>
+                    <div aria-colcount="col">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            [disabled]="passwordForm.invalid"
+                            (click)="savePassword()"
+                        >alterar</button>
+                    </div>
+                </form>
+            </mdb-tab>
+
+            <mdb-tab *ngIf="!admin" title="Endereço">
+                <app-address
+                  *ngIf="isAddress"
+                  [address]="address"
+                  (changed)="emitAddress($event)"
+                ></app-address>
+                <div class="col">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        [disabled]="!addressValid"
+                        (click)="saveAddress()"
+                    >alterar</button>
+                </div>
+            </mdb-tab>
+        </mdb-tabs>
+    </div>
+</section>

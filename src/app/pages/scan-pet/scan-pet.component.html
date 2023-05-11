@@ -1,0 +1,107 @@
+<section id="scan-pet" class="mb-5">
+
+  <div class="row">
+    <div class="col-12 col-md-3 text-center">
+      <div class="avatar">
+        <img [src]="imageURL">
+      </div>
+      <div class="card-purple">
+        <div class="content">
+          <h4>{{ pet?.name }}</h4>
+          <p class="breed">{{ pet?.breed }}</p>
+
+          <p class="lh">
+            <strong>Espécie</strong><br/>
+            {{ pet?.species }}
+          </p>
+          <p class="lh">
+            <strong>Gênero</strong><br/>
+            {{ pet?.genre }}
+          </p>
+          <p class="lh mb-4">
+            <strong>Idade</strong><br/>
+            {{ pet?.age }}
+          </p>
+
+          <a
+            [routerLink]="['/perfil/', petId]"
+            class="link-view"
+          >visualizar perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-9">
+      <form [formGroup]="scanForm" (keyup.enter)="onSubmit()" class="border-purple">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h4>
+                Ao enviar as <strong>informações abaixo</strong>, você<br/>
+                <strong>ajuda o tutor a encontrar seu pet</strong>.
+              </h4>
+            </div>
+          </div>
+
+          <div *ngIf="isAddress" class="row mt-4">
+
+            <app-alert
+              [hidden]="!isAlert"
+              [status]="status"
+              [message]="message"
+            ></app-alert>
+            <app-loading
+              [hidden]="!isLoading"
+            ></app-loading>
+
+            <div *ngIf="status !== 'success'" class="col-12 col-md-5">
+              <div class="row">
+                <div class="col-12">
+                  <h5>Dados para contato</h5>
+                </div>
+                <div class="col-12">
+                  <mdb-form-control class="mb-3">
+                    <input mdbInput formControlName="name" type="text" id="name" class="form-control"/>
+                    <label mdbLabel class="form-label" for="name">Nome</label>
+                  </mdb-form-control>
+
+                  <mdb-form-control class="mb-3">
+                    <input mdbInput formControlName="email" type="email" id="email" class="form-control"/>
+                    <label mdbLabel class="form-label" for="email">E-mail</label>
+                  </mdb-form-control>
+
+                  <mdb-form-control>
+                    <input mdbInput formControlName="phone" type="text" id="phone" class="form-control" mask="(00) 00000-0000"/>
+                    <label mdbLabel class="form-label" for="phone">Celular</label>
+                  </mdb-form-control>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="status !== 'success'" class="col-12 col-md-7">
+              <div class="row">
+                <div class="col-12">
+                  <h5>Endereço</h5>
+                </div>
+              </div>
+              <app-address
+                [address]="address"
+                (changed)="emitAddress($event)"
+              ></app-address>
+            </div>
+
+            <div *ngIf="status !== 'success'" class="col-12 mt-3 mb-4">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                [disabled]="scanForm.invalid || !addressValid"
+                (click)="onSubmit()"
+              >enviar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>

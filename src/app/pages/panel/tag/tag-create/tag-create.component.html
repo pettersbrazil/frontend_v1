@@ -1,0 +1,35 @@
+<div id="tag-create">
+    <div class="modal-header">
+        <h5 class="modal-tittle">
+            Cadastrar
+        </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalCreate.close()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container mb-5">
+            <div class="row">
+                <h4>
+                    Informe a quantidade de pingentes<br aria-hidden="true">
+                    a serem gerados:
+                </h4>
+            </div>
+            <div class="row mt-4">
+                <div class="col-6">
+                    <form [formGroup]="tagCreateForm" (keyup.enter)="onSubmit()">
+                        <mdb-form-control>
+                            <input mdbInput formControlName="quantity" type="number" id="quantity" class="form-control"/>
+                            <label mdbLabel class="form-label" for="quantity">Quantidade</label>
+                        </mdb-form-control>
+            
+                        <button
+                            type="button"
+                            class="btn btn-secondary mt-3"
+                            [disabled]="tagCreateForm.invalid"
+                            (click)="onSubmit()"
+                        >cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

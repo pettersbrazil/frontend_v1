@@ -1,0 +1,30 @@
+#panel {
+    h3 {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 46px;
+        color: #632AC0;
+    }
+  
+    .breadcrumb {
+        font-family: 'Inter';
+        font-style: normal;
+        font-size: 12px;
+  
+        li a {
+            color: #8078b3;
+            font-weight: 400;
+        }
+  
+        li a:hover,
+        li a:focus {
+            color: #632AC0;
+        }
+    
+        li strong {
+            color: #8078b3;
+            font-weight: 700;
+        }
+    }
+}

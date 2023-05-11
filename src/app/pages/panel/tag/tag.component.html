@@ -1,0 +1,62 @@
+<section id="tag">
+
+    <div class="row mb-2">
+      <app-alert
+        [hidden]="!isAlert"
+        [status]="status"
+        [message]="message"
+      ></app-alert>
+      <app-loading
+        [hidden]="!isLoading"
+      ></app-loading>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12 col-md-10">
+            <button
+              type="button"
+              class="btn btn-{{ statusParams == 'todos' ? 'secondary' : 'link' }}"
+              (click)="statusParams = 'todos'"
+              [routerLink]="['/painel/pingentes']"
+              [queryParams]="{ status: 'todos' }"
+            >todos</button>
+            <button
+              type="button"
+              class="btn btn-{{ statusParams == 'vinculados' ? 'secondary' : 'link' }}"
+              (click)="statusParams = 'vinculados'"
+              [routerLink]="['/painel/pingentes']"
+              [queryParams]="{ status: 'vinculados' }"
+            >vinculados</button>
+            <button
+              type="button"
+              class="btn btn-{{ statusParams == 'nao-vinculados' ? 'secondary' : 'link' }}"
+              (click)="statusParams = 'nao-vinculados'"
+              [routerLink]="['/painel/pingentes']"
+              [queryParams]="{ status: 'nao-vinculados' }"
+            >não vinculados</button>
+            <button
+              type="button"
+              class="btn btn-{{ statusParams == 'inativos' ? 'secondary' : 'link' }}"
+              (click)="statusParams = 'inativos'"
+              [routerLink]="['/painel/pingentes']"
+              [queryParams]="{ status: 'inativos' }"
+            >inativos</button>
+        </div>
+        <div class="col-2">
+            <div class="d-grid gap-2 mx-auto">
+                <button
+                  *ngIf="validRole('tag', 'create')"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="openModalCreate()"
+                >cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <app-tag-list
+      *ngIf="!isReload"
+      (changed)="warning($event)"
+    ></app-tag-list>
+
+</section>

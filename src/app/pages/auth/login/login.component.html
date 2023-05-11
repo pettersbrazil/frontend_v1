@@ -1,0 +1,47 @@
+<section id="login">
+
+  <div [hidden]="!dataLogin.isLogin">
+
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+    ></app-alert>
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+
+    <h4 class="mb-4">
+      Entrar
+    </h4>
+
+    <form [formGroup]="loginForm" (keyup.enter)="onSubmit()">
+      <mdb-form-control class="mb-3">
+        <input mdbInput formControlName="email" type="email" id="email" class="form-control" required/>
+        <label mdbLabel class="form-label" for="email">E-mail</label>
+      </mdb-form-control>
+
+      <mdb-form-control>
+        <input mdbInput formControlName="password" type="password" id="password" class="form-control" required/>
+        <label mdbLabel class="form-label" for="password">Senha</label>
+      </mdb-form-control>
+
+      <div class="mb-4">
+        <a href="javascript:void(0);" (click)="recoverPassword()">Esqueceu a senha?</a>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        [disabled]="loginForm.invalid"
+        (click)="onSubmit()"
+      >entrar</button>
+    </form>
+  </div>
+
+  <app-recover-password
+    [hidden]="!isRecoverPassword"
+    (changed)="login($event)"
+  ></app-recover-password>
+
+</section>

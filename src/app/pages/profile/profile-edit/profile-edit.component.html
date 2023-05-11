@@ -1,0 +1,65 @@
+<div id="profile-edit">
+
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+
+    <div class="modal-header">
+        <h5 class="modal-tittle">
+            Editar
+        </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalProfileEdit.close()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container mb-4">
+            <form [formGroup]="editPetForm" (keyup.enter)="onSubmit()" class="row">
+                <div class="col-8 mb-3">
+                    <mdb-form-control>
+                        <input mdbInput formControlName="name" type="text" id="name" class="form-control"/>
+                        <label mdbLabel class="form-label" for="name">Nome</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-4 mb-3">
+                    <mdb-form-control>
+                        <input mdbInput formControlName="species" type="text" id="species" class="form-control"/>
+                        <label mdbLabel class="form-label" for="species">Espécie</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-4 mb-3">
+                    <mdb-form-control>
+                        <input mdbInput formControlName="breed" type="text" id="breed" class="form-control"/>
+                        <label mdbLabel class="form-label" for="breed">Raça</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-4 mb-3">
+                    <mdb-form-control>
+                        <input mdbInput formControlName="genre" type="text" id="genre" class="form-control"/>
+                        <label mdbLabel class="form-label" for="genre">Gênero</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-4 mb-3">
+                    <mdb-form-control>
+                        <input mdbInput formControlName="age" type="text" id="age" class="form-control"/>
+                        <label mdbLabel class="form-label" for="age">Idade</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-12 mb-3">
+                    <mdb-form-control>
+                        <textarea mdbInput formControlName="description" id="description" class="form-control"></textarea>
+                        <label mdbLabel class="form-label" for="description">Descrição</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-12">
+                    <button
+                        type="button"
+                        class="btn btn-secondary mt-3"
+                        [disabled]="editPetForm.invalid"
+                        (click)="onSubmit()"
+                    >
+                        salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

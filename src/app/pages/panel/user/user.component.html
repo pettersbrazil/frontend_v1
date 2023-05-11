@@ -1,0 +1,35 @@
+<section id="user">
+
+  <div class="row mb-2">
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+    ></app-alert>
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+  </div>
+
+  <div
+    *ngIf="validRole('admin', 'create')"
+    [hidden]="!admin"
+    class="row mb-4"
+  >
+      <div class="offset-md-10 col-2">
+          <div class="d-grid gap-2 mx-auto">
+              <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="openModalCreate()"
+              >cadastrar</button>
+          </div>
+      </div>
+  </div>
+
+  <app-user-list
+    *ngIf="!isReload"
+    (changed)="warning($event)"
+  ></app-user-list>
+
+</section>

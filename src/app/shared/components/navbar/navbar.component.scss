@@ -1,0 +1,29 @@
+#navbar {
+  background-color: #632AC0 !important;
+  z-index: 999;
+
+  img {
+    width: 180px;
+  }
+
+  .navbar-toggler {
+    color: #ffffff;
+  }
+
+  .navbar-collapse {
+    &.show {
+      text-align: right;
+    }
+  }
+
+  .navbar-nav li a {
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 5px 20px;
+  }
+
+  .navbar-nav li a:hover,
+  .navbar-nav li a:focus {
+    color: #08c49f;
+  }
+}

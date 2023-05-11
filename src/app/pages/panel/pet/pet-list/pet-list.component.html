@@ -1,0 +1,65 @@
+<section id="pet-list">
+  <div class="row">
+    <div class="col">
+      <mdb-form-control>
+        <input mdbInput type="text" id="search" class="form-control" [(ngModel)]="filter"/>
+        <label mdbLabel class="form-label" for="search">Filtrar</label>
+      </mdb-form-control>
+      <div class="table-responsive">
+        <table class="table align-middle mb-3 bg-white mt-2">
+          <thead class="bg-light">
+            <tr>
+              <th class="fw-bold" (click)="sort('nome')">
+                Nome
+                <span *ngIf="key =='nome'">{{ reverse ? '▲' : '▼' }}</span>
+              </th>
+              <th class="fw-bold" (click)="sort('situacao')">
+                Situação
+                <span *ngIf="key =='situacao'">{{ reverse ? '▲' : '▼' }}</span></th>
+              <th class="fw-bold" (click)="sort('acoes')">
+                Ações
+                <span *ngIf="key =='acoes'">{{ reverse ? '▲' : '▼' }}</span></th>
+            </tr>
+          </thead>
+          <tbody class="fw-normal">
+            <tr
+              *ngFor="
+                let pet of pets
+                  | filter: filter
+                  | paginate : { itemsPerPage: 5, currentPage: currentPage }
+                  | orderBy: key : reverse;
+                let i = index
+              "
+            >
+              <td>
+                {{ pet.name }}
+              </td>
+              <td>
+                <span
+                  [class.badge-success]="true"
+                  [class.badge-warning]="false"
+                  class="badge rounded-pill d-inline"
+                  >{{ true ? "ativo" : "inativo" }}</span
+                >
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm btn-rounded"
+                  [routerLink]="['/perfil', pet._id]"
+                >
+                  ver perfil
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls
+          (pageChange)="currentPage = $event"
+          previousLabel="Anterior"
+          nextLabel="Próximo"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</section>

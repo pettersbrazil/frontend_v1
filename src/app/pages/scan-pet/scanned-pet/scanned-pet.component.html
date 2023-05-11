@@ -1,0 +1,27 @@
+<div id="scanned-pet">
+  <div class="modal-header">
+    <h3 class="modal-tittle">Pingente Escaneado</h3>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalScanned.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-12">
+          <app-scanned-pet-list
+            *ngIf="scannedList"
+            (changed)="scannerSelected($event)"
+          ></app-scanned-pet-list>
+          <app-scanned-pet-view
+            *ngIf="scannedView"
+            [scanner]="scanner"
+          ></app-scanned-pet-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

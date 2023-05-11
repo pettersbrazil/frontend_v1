@@ -1,0 +1,58 @@
+<section id="contact-us" class="mb-5">
+  <div class="row">
+
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+    ></app-alert>
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+
+    <div class="col-12 col-lg-6">
+      <form [formGroup]="contactForm" (keyup.enter)="onSubmit()" class="row">
+        <div class="col-12 col-lg-8 mb-3">
+            <mdb-form-control>
+                <input mdbInput formControlName="name" type="text" id="name" class="form-control"/>
+                <label mdbLabel class="form-label" for="name">Nome</label>
+            </mdb-form-control>
+        </div>
+        <div class="col-12 col-lg-8 mb-3">
+          <mdb-form-control>
+              <input mdbInput formControlName="phone" type="text" id="phone" class="form-control" mask="(00) 00000-0000"/>
+              <label mdbLabel class="form-label" for="phone">Celular</label>
+          </mdb-form-control>
+        </div>
+        <div class="col-12 col-lg-8 mb-3">
+          <mdb-form-control>
+              <input mdbInput formControlName="email" type="email" id="email" class="form-control"/>
+              <label mdbLabel class="form-label" for="email">E-mail</label>
+          </mdb-form-control>
+        </div>
+        <div class="col-12 col-lg-8 mb-3">
+          <mdb-form-control>
+              <input mdbInput formControlName="subject" type="text" id="subject" class="form-control"/>
+              <label mdbLabel class="form-label" for="subject">Assunto</label>
+          </mdb-form-control>
+        </div>
+        <div class="col-12 col-lg-8 mb-3">
+            <mdb-form-control>
+                <textarea mdbInput formControlName="description" id="description" class="form-control"></textarea>
+                <label mdbLabel class="form-label" for="description">Descrição</label>
+            </mdb-form-control>
+        </div>
+        <div class="col-12 col-lg-8">
+            <button
+                type="button"
+                class="btn btn-secondary mt-3"
+                [disabled]="contactForm.invalid"
+                (click)="onSubmit()"
+            >
+                enviar
+            </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

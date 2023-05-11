@@ -1,0 +1,19 @@
+#app-content {
+  background-color: #ffffff;
+}
+
+::ng-deep .ngx-pagination {
+  .current {
+    background: #08c49f !important;
+  }
+
+  .panel {
+    margin: 30px 0 50px 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .panel {
+    margin: 30px 0;
+  }
+}

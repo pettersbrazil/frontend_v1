@@ -1,0 +1,39 @@
+<section id="bind-pet" class="mb-5">
+  <div class="row">
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+      [linkAuth]="linkAuth"
+    ></app-alert>
+    <app-loading [hidden]="!isLoading"></app-loading>
+
+    <div *ngIf="status !== 'success'" class="col-12 col-md-4">
+      <h4>Informe o código de verificação.</h4>
+
+      <form [formGroup]="bindPetForm" (keyup.enter)="onSubmit()">
+        <mdb-form-control>
+          <input
+            mdbInput
+            formControlName="secret"
+            type="text"
+            id="secret"
+            class="form-control"
+          />
+          <label mdbLabel class="form-label" for="secret"
+            >Código de Verificação</label
+          >
+        </mdb-form-control>
+
+        <button
+          type="button"
+          class="btn btn-secondary mt-3"
+          [disabled]="bindPetForm.invalid"
+          (click)="onSubmit()"
+        >
+          verificar
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

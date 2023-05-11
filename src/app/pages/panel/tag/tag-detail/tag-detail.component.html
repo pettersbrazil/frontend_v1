@@ -1,0 +1,56 @@
+<div id="tag-detail">
+    <div class="modal-header">
+        <h5 class="modal-tittle">
+            Detalhes
+        </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalDetail.close()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container mb-3">
+            <form [formGroup]="tagDetailForm" class="row">
+                <div class="col-12 mb-3">
+                  <span
+                    [class.badge-success]="tag.status == 'active'"
+                    [class.badge-warning]="tag.status == 'waiting'"
+                    class="badge rounded-pill d-inline"
+                  >{{ status[tag.status] }}</span>
+                </div>
+                <div class="col-4">
+                    <mdb-form-control>
+                        <input mdbInput formControlName="code" type="text" id="code" class="form-control"/>
+                        <label mdbLabel class="form-label" for="code">Código</label>
+                    </mdb-form-control>
+                </div>
+                <div class="col-12">
+                    <a
+                      *ngIf="pet"
+                      (click)="modalDetail.close()"
+                      [routerLink]="['/perfil', pet._id]"
+                    >visualizar perfil</a>
+                </div>
+                <div *ngIf="!isDelete" class="col mt-5">
+                    <button
+                      *ngIf="validRole('tag', 'delete')"
+                      type="button"
+                      class="btn btn-danger"
+                      [class.disabled]="!(tag.status === 'waiting')"
+                      (click)="isDelete = true"
+                    >excluir</button>
+                </div>
+                <div *ngIf="isDelete" class="col mt-5">
+                  <span class="text-delete"> Você deseja excluir? </span>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="isDelete = false"
+                  >não</button>
+                  <button
+                    type="button"
+                    class="btn btn-link"
+                    (click)="deleteTag()"
+                  >sim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

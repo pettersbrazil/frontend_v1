@@ -1,0 +1,25 @@
+<div id="auth">
+    <div class="modal-body">
+        <div class="modal-close">
+            <button type="button" class="btn-close" aria-label="Close" (click)="modalAuth.close()"></button>
+        </div>
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <app-login [dataLogin]="dataLogin"></app-login>
+                    <app-register
+                        [hidden]="!isRegister"
+                        [dataRegister]="dataRegister"
+                        (changed)="login($event)"
+                    ></app-register>
+                
+                    <div class="row mt-5" [hidden]="!dataLogin.isLogin">
+                        <p>
+                            Não tem uma conta? <a href="javascript:void(0);" (click)="register()">Registre-se</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

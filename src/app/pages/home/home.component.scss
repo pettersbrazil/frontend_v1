@@ -1,0 +1,75 @@
+#banner {
+  background-color: #632AC0;
+  color: #ffffff;
+  padding: 50px 20px;
+
+  h1 {
+    font-family: 'Aclonica', sans-serif;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #banner-shadown {
+    max-width: 320px;
+    position: absolute;
+    transform:rotate(180deg);
+  }
+
+  #banner-pets {
+    margin-top: -40px;
+    margin-left: -45px;
+    max-width: 310px;
+    position: absolute;
+  }
+}
+
+#information {
+  h3 {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 46px;
+
+    span {
+      color: #08c49f;
+    }
+  }
+
+  h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  img {
+    height: 130px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #banner {
+    text-align: center;
+
+    #image {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  h1 {
+    padding: 0 100px 0px 0px;
+  }
+
+  p {
+    padding: 0 60px 0px 0px;
+  }
+}

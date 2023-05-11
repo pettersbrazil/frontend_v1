@@ -1,0 +1,42 @@
+#footer {
+  background-color: #8078B3;
+  padding: 50px 0;
+
+  img {
+    width: 150px;
+  }
+
+  .text-light {
+    padding: 0 15px;
+  }
+
+  .text-light:hover,
+  .text-light:focus {
+    color: #08c49f !important;
+  }
+
+  .btn-outline-light:hover,
+  .btn-outline-light:focus {
+    color: #08c49f !important;
+    border-color: #08c49f !important;
+  }
+
+  .institutional-content {
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #footer {
+    padding: 25px 0;
+
+    .institutional-content {
+      margin: 20px 0;
+      text-align: center;
+
+      .text-light {
+        display: block;
+      }
+    }
+  }
+}

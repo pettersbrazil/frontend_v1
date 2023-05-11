@@ -1,0 +1,38 @@
+#not-found {
+  margin: 0 auto;
+
+  .content {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -10vh;
+      bottom: 0;
+
+      i {
+          color: #8078b3;
+          margin-right: -4vh;
+      }
+
+      h1 {
+          font-family: 'Aclonica', sans-serif;
+          font-style: normal;
+          font-weight: 700;
+          color: #8078b3;
+          font-size: 16vh;
+          text-shadow: 10px 10px #6a737c;
+
+          small {
+              font-family: Inter;
+              font-weight: 400;
+              color: #6a737c;
+              font-size: 14px;
+              text-shadow: none;
+              display: block;
+              margin-top: -15px;
+          }
+      }
+  }
+}

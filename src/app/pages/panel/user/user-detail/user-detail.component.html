@@ -1,0 +1,168 @@
+<div id="user-detail">
+  <div class="modal-header">
+    <h5 class="modal-tittle">Detalhes</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalDetail.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="container mb-3">
+      <form [formGroup]="userDetailForm" class="row" enctype="multipart/form-data">
+        <div class="{{ admin ? 'col-6' : 'col-12' }} mb-3">
+          <mdb-form-control>
+            <input
+              mdbInput
+              formControlName="name"
+              type="text"
+              id="name"
+              class="form-control"
+            />
+            <label mdbLabel class="form-label" for="name">Nome</label>
+          </mdb-form-control>
+        </div>
+        <div class="col-6 mb-3">
+          <mdb-form-control>
+            <input
+              mdbInput
+              formControlName="email"
+              type="email"
+              id="email"
+              class="form-control"
+            />
+            <label mdbLabel class="form-label" for="email">E-mail</label>
+          </mdb-form-control>
+        </div>
+        <div *ngIf="!admin" class="col-6 mb-3">
+          <mdb-form-control>
+            <input
+              mdbInput
+              formControlName="phone"
+              type="text"
+              id="phone"
+              class="form-control"
+              mask="(00) 00000-0000"
+            />
+            <label mdbLabel class="form-label" for="phone">Telefone</label>
+          </mdb-form-control>
+        </div>
+        <div *ngIf="admin" class="col-12">
+          <div class="row">
+            <h5>Permissões</h5>
+          </div>
+          <div
+            *ngIf="!userRoles"
+            class="text-center"
+          >
+            <div class="spinner-border text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div *ngIf="userRoles">
+            <div class="row">
+              <div class="col-2 offset-4">Cadastrar</div>
+              <div class="col-2">Visualizar</div>
+              <div class="col-2">Editar</div>
+              <div class="col-2">Excluir</div>
+            </div>
+            <div class="row" *ngFor="let roleName of roleNames; let i = index">
+              <div class="col-4">
+                <strong>{{ roleName.title }}</strong>
+              </div>
+              <div
+                class="col-2"
+                *ngFor="let role of roleNames[i].roles"
+              >
+                <div class="form-check">
+                  <input
+                    mdbCheckbox
+                    class="form-check-input"
+                    type="checkbox"
+                    [checked]="isChecked(roleName.role, role)"
+                    (change)="userRoles.roles[roleName.role][role] = !userRoles.roles[roleName.role][role]"
+                    id="checkbox{{ roleName.role | titlecase }}{{ role | titlecase }}"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!admin" class="col-12">
+          <h5>Pets</h5>
+          <div
+            *ngIf="!pets"
+            class="text-center"
+          >
+            <div class="spinner-border text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <table *ngIf="pets" class="table">
+            <thead>
+              <tr>
+                <th class="fw-bold">Nome</th>
+                <th class="fw-bold text-center">Situação</th>
+                <th class="fw-bold text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="fw-normal">
+              <tr *ngFor="let pet of pets">
+                <td>
+                  {{ pet.first_name }}
+                </td>
+                <td class="text-center">
+                  <span
+                    [class.badge-success]="true"
+                    [class.badge-warning]="false"
+                    class="badge rounded-pill d-inline"
+                    >{{ true ? "ativo" : "inativo" }}</span
+                  >
+                </td>
+                <td class="text-center">
+                  <button
+                    type="button"
+                    class="btn btn-link btn-sm btn-rounded"
+                    (click)="modalDetail.close()"
+                    [routerLink]="['/perfil/' + pet._id]"
+                  >
+                    ver perfil
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="admin && !isDelete" class="col mt-5">
+          <button
+            *ngIf="validRole('admin', 'update')"
+            type="button"
+            class="btn btn-secondary"
+            (click)="onSubmit()"
+          >alterar</button>
+          <button
+            *ngIf="validRole('admin', 'delete')"
+            [hidden]="isDelete"
+            type="button"
+            class="btn btn-link"
+            (click)="isDelete = true"
+          >excluir</button>
+        </div>
+        <div *ngIf="admin && isDelete" class="col mt-5">
+          <span class="text-delete"> Você deseja excluir? </span>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="isDelete = false"
+          >não</button>
+          <button
+            type="button"
+            class="btn btn-link"
+            (click)="deleteUser()"
+          >sim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

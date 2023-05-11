@@ -1,0 +1,21 @@
+<section id="scanned-pet-list">
+  <div class="row">
+    <div class="col-12">
+      <h4>Data/Hora</h4>
+    </div>
+  </div>
+  <div *ngFor="let scanner of scanners" class="row">
+    <div class="col-9">
+      <p>{{ scanner?.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+    <div class="col-3 text-center">
+      <button
+        type="button"
+        class="btn btn-link btn-sm btn-rounded"
+        (click)="detail(scanner)"
+      >
+        detalhes
+      </button>
+    </div>
+  </div>
+</section>

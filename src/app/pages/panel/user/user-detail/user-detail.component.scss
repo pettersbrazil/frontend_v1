@@ -1,0 +1,32 @@
+#user-detail {
+  h5 {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      color: #08c49f;
+      font-size: 16px;
+  }
+
+  .form-check {
+    display: flex;
+    justify-content: center;
+  }
+
+  .modal-tittle {
+      color: #6322c0;
+  }
+
+  .modal-header {
+      border-bottom: 0;
+  }
+
+  .text-delete {
+    display: flex;
+  }
+
+  .spinner-border {
+    &.text-secondary {
+      color: rgb(128 120 179) !important;
+    }
+  }
+}

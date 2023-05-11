@@ -1,0 +1,45 @@
+<section id="scanned-pet-view">
+
+  <div class="row">
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+    ></app-alert>
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <div #mapElement class="map"></div>
+    </div>
+  </div>
+
+  <div *ngIf="user" class="row mb-2">
+    <div class="col-12">
+      <h5>Pessoa</h5>
+    </div>
+    <div class="col-12">
+      <strong>Nome:</strong> {{ user?.name }}
+    </div>
+    <div class="col-4">
+      <strong>Tel.:</strong> {{ phone | mask: '(00) 00000-0000' }}
+    </div>
+    <div class="col-8">
+      <strong>E-mail:</strong> {{ user?.email }}
+    </div>
+  </div>
+
+  <div *ngIf="address" class="row">
+    <div class="col-12">
+      <h5>Endereço</h5>
+    </div>
+    <div class="col-12">
+      {{ address.addressline }}, {{ address.streetNumber }} {{ address?.complement }}<br aria-hidden="true"/>
+      {{ address.district }} - {{ address.city }}/{{ address.state }}<br aria-hidden="true"/>
+      {{ address.zip | mask: '00000-000' }}
+    </div>
+  </div>
+</section>

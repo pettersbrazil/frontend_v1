@@ -1,0 +1,21 @@
+<div id="breadcrumb" class="container mt-3 mb-5">
+    <div class="row mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li *ngFor="let r of breadcrumb?.routers" class="breadcrumb-item">
+                    <a *ngIf="!r.active" [routerLink]="[r?.route]">{{ r?.title }}</a>
+                    <strong *ngIf="r.active">{{ r?.title }}</strong>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h3>
+                {{ breadcrumb?.title }}
+                <span *ngIf="typeUser">| {{ typeUser | titlecase }}</span>
+            </h3>
+        </div>
+    </div>
+</div>

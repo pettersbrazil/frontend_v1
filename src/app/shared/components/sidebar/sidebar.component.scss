@@ -1,0 +1,30 @@
+#sidebar {
+    &.card {
+        box-shadow: none;
+
+        .list-group li a {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            color: #8078b3;
+    
+            i {
+                color: #632AC0;
+                width: 25px;
+            }
+        }
+        .list-group li a:hover,
+        .list-group li a:focus {
+            color: #08c49f;
+        }
+        .list-group li a {
+            &.active {
+                color: #08c49f;
+        
+                i {
+                    color: #08c49f;
+                }
+            }
+        }    
+    }
+}

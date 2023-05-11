@@ -1,0 +1,142 @@
+<section id="profile" class="mb-5">
+
+  <div class="row">
+    <app-alert
+      [hidden]="!petScan"
+      [status]="'info'"
+      [message]="'Seu pet foi escaneado. Veja mais informações '"
+      [petScan]="true"
+    ></app-alert>
+
+    <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+    ></app-alert>
+    <app-loading
+      [hidden]="!isLoading"
+    ></app-loading>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-3 text-center">
+      <label
+        *ngIf="isLogged && validTutor()"
+        class="upload-image"
+        for="image"
+      >
+        <input id="image" type="file" accept="image/*" (change)="uploadImage($event)"/>
+        <span class="btn btn-light btn-edit btn-rounded">
+          <i class="fas fa-camera-retro"></i>
+          alterar
+        </span>
+      </label>
+      <div class="avatar">
+        <img [src]="imageURL">
+      </div>
+      <div class="card-purple">
+        <div class="content">
+          <h4>{{ pet?.name }}</h4>
+          <p class="breed">{{ pet?.breed }}</p>
+
+          <p class="lh">
+            <strong>Espécie</strong><br/>
+            {{ pet?.species }}
+          </p>
+          <p class="lh">
+            <strong>Gênero</strong><br/>
+            {{ pet?.genre }}
+          </p>
+          <p class="lh mb-4">
+            <strong>Idade</strong><br/>
+            {{ pet?.age }}
+          </p>
+
+          <a
+            *ngIf="isLogged && validTutor()"
+            href="javascript:void(0);"
+            class="link-view"
+            (click)="openModal()"
+          >editar perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-9">
+      <div class="border-purple">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h5>Descrição</h5>
+              <p>
+                {{ pet?.description }}
+              </p>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-12">
+              <h4>
+                Dados do Tutor
+              </h4>
+            </div>
+            <div class="col-12 lh15">
+              <p>
+                <strong>Nome: </strong>
+                {{ tutor?.name }}
+              </p>
+            </div>
+            <div class="col-4">
+              <p>
+                <strong>Tel.: </strong>
+                <a href="tel:+55{{ contact?.phone }}">+55 {{ phone | mask: '(00) 00000-0000' }}</a>
+              </p>
+            </div>
+            <div class="col-8">
+              <p>
+                <strong>E-mail: </strong>
+                <a href="mailto:{{ tutor?.email }}">{{ tutor?.email }}</a>
+              </p>
+            </div>
+
+            <div class="col-12">
+              <h5>
+                Endereço
+              </h5>
+            </div>
+            <div class="col-4 lh15">
+              <p>
+                <strong>CEP: </strong>
+                {{ zip | mask: '00000-000' }}
+              </p>
+            </div>
+            <div class="col-8 lh15">
+              <p>
+                <strong>Logradouro:</strong>
+                {{ address?.addressline }}, {{ address?.streetNumber }} {{ address?.complement }}
+              </p>
+            </div>
+            <div class="col-4">
+              <p>
+                <strong>Bairro: </strong>
+                {{ address?.district }}
+              </p>
+            </div>
+            <div class="col-4">
+              <p>
+                <strong>Cidade: </strong>
+                {{ address?.city }}
+              </p>
+            </div>
+            <div class="col-4">
+              <p>
+                <strong>Estado: </strong>
+                {{ address?.state }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+<nav id="navbar" class="navbar navbar-expand-lg bg-light">
+  <div class="container">
+    <a class="navbar-brand me-2" [routerLink]="['/inicio']">
+      <img src="../../../../assets/logo_greenwater.png">
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      aria-controls="navbarToggleExternalContent"
+      (click)="toggle()"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div
+      [class.show]="isCollapse"
+      class="navbar-collapse collapse"
+      id="navbarButtonsExample"
+      mdbCollapse
+    >
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/inicio']">início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/fale-conosco']">fale conosco</a>
+        </li>
+        <li *ngIf="isLogged()" mdbDropdown class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript:void(0)"
+            id="navbarDropdownMenuLink"
+            role="button"
+            mdbDropdownToggle
+            aria-expanded="false"
+          >
+            olá, <strong>{{ getUsername() }}</strong>!
+          </a>
+          <ul
+            mdbDropdownMenu
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li [hidden]="isTutor">
+              <a class="dropdown-item" [routerLink]="['/painel']">
+                <i class="fas fa-columns"></i>
+                Painel
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/meus-dados']">
+                <i class="fas fa-user-circle"></i>
+                Meus Dados
+              </a>
+            </li>
+            <li [hidden]="isAdmin">
+              <a class="dropdown-item" [routerLink]="['/painel/pets']">
+                <i class="fas fa-paw"></i>
+                Pets
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Sair
+              </a>
+            </li>
+          </ul>
+        </li>
+        <button
+          *ngIf="!isLogged()"
+          (click)="openModal()"
+          type="button"
+          class="btn btn-success btn-rounded"
+        >
+          entrar
+        </button>
+      </ul>
+    </div>
+  </div>
+</nav>

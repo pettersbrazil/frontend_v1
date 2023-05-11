@@ -1,0 +1,26 @@
+<div [hidden]="!(status === 'info')" class="alert alert-info mb-2" role="alert" data-mdb-color="info">
+    <i class="fas fa-exclamation-circle fa-lg"></i>
+    <span [innerHTML]="message"></span>
+    <a
+      *ngIf="petScan"
+      href="javascript:void(0);"
+      (click)="openModalInfo()"
+    >clicando aqui</a>
+</div>
+<div [hidden]="!(status === 'success')" class="alert alert-success mb-2" role="alert" data-mdb-color="success">
+    <i class="fas fa-exclamation-circle fa-lg"></i>
+    <span [innerHTML]="message"></span>
+    <a
+      *ngIf="linkAuth"
+      href="javascript:void(0);"
+      (click)="openModalSuccess()"
+    >clicando aqui</a>
+</div>
+<div [hidden]="!(status === 'warning')" class="alert alert-warning mb-2" role="alert" data-mdb-color="warning">
+    <i class="fas fa-exclamation-triangle fa-lg"></i>
+    <span [innerHTML]="message"></span>
+</div>
+<div [hidden]="!(status === 'error')" class="alert alert-danger mb-2" role="alert" data-mdb-color="danger">
+    <i class="fas fa-exclamation-triangle fa-lg"></i>
+    <span [innerHTML]="message ? message : 'Aconteceu um erro no servidor, tente movamente mais tarde!'"></span>
+</div>

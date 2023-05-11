@@ -1,0 +1,83 @@
+<div id="user-create">
+
+  <app-loading
+    [hidden]="!isLoading"
+  ></app-loading>
+
+  <div class="modal-header">
+      <h5 class="modal-tittle">
+          Cadastrar
+      </h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalCreate.close()"></button>
+  </div>
+  <div class="modal-body">
+      <div class="container mb-3">
+        <form [formGroup]="userCreateForm" class="row">
+          <div class="col-6 mb-3">
+            <mdb-form-control>
+              <input
+                mdbInput
+                formControlName="name"
+                type="text"
+                id="name"
+                class="form-control"
+              />
+              <label mdbLabel class="form-label" for="name">Nome</label>
+            </mdb-form-control>
+          </div>
+          <div class="col-6 mb-3">
+            <mdb-form-control>
+              <input
+                mdbInput
+                formControlName="email"
+                type="email"
+                id="email"
+                class="form-control"
+              />
+              <label mdbLabel class="form-label" for="email">E-mail</label>
+            </mdb-form-control>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <h5>Permissões</h5>
+            </div>
+            <div class="row text-center">
+              <div class="col-2 offset-4">Cadastrar</div>
+              <div class="col-2">Visualizar</div>
+              <div class="col-2">Editar</div>
+              <div class="col-2">Excluir</div>
+            </div>
+            <div class="row" *ngFor="let roleName of roleNames; let i = index">
+              <div [formArrayName]="roleName.role+'Roles'" class="row">
+                <div class="col-4">
+                  <strong>{{ roleName.title }}</strong>
+                </div>
+                <div
+                  class="col-2"
+                  *ngFor="let role of roleNames[i].roles"
+                >
+                  <div class="form-check">
+                    <input
+                      mdbCheckbox
+                      class="form-check-input"
+                      type="checkbox"
+                      [formControlName]="role"
+                      id="checkbox{{ roleName.role | titlecase }}{{ role | titlecase }}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mt-5">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              [disabled]="userCreateForm.invalid"
+              (click)="onSubmit()"
+            >salvar</button>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>

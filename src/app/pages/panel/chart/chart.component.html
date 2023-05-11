@@ -1,0 +1,88 @@
+<section id="charts" class="col-9">
+
+    <div class="row mb-2">
+      <app-alert
+        [hidden]="!isAlert"
+        [status]="status"
+        [message]="message"
+      ></app-alert>
+      <app-loading
+        [hidden]="!isLoading || (scanner && pet && tutor)"
+      ></app-loading>
+    </div>
+
+    <div class="row line-vertical">
+        <div class="col-12 col-sm-4">
+            <div class="chart-detail">
+                <h2 class="mb-4">
+                    {{ tutor?.total || 0 }}
+                    <small>Clientes</small>
+                </h2>
+                <div class="row">
+                    <div class="col">
+                        <p class="lh"><strong>Hoje:</strong></p>
+                    </div>
+                    <div class="col text-right">
+                        <p class="lh">{{ tutor?.today || 0 }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="lh"><strong>Semana:</strong></p>
+                    </div>
+                    <div class="col text-right">
+                        <p class="lh">{{ tutor?.week || 0 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="chart-detail">
+                <h2 class="mb-4">
+                    {{ pet?.total || 0 }}
+                    <small>Pets</small>
+                </h2>
+                <div class="row">
+                    <div class="col">
+                        <p class="lh"><strong>Hoje:</strong></p>
+                    </div>
+                    <div class="col text-right">
+                        <p class="lh">{{ pet?.today || 0 }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="lh"><strong>Semana:</strong></p>
+                    </div>
+                    <div class="col text-right">
+                        <p class="lh">{{ pet?.week || 0 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="chart-detail">
+                <h2 class="mb-4">
+                    {{ scanner?.total || 0 }}
+                    <small>Pingentes Escaneados</small>
+                </h2>
+                <div class="row">
+                    <div class="col">
+                        <p class="lh"><strong>Hoje:</strong></p>
+                    </div>
+                    <div class="col text-right">
+                        <p class="lh">{{ scanner?.today || 0 }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="lh"><strong>Semana:</strong></p>
+                    </div>
+                    <div class="col text-right">
+                        <p class="lh">{{ scanner?.week || 0 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,52 @@
+<form id="addressForm" [formGroup]="addressForm" (change)="emitAddress()" class="row">
+
+  <app-alert
+    [hidden]="!isAlert"
+    [status]="status"
+    [message]="message"
+  ></app-alert>
+
+  <div class="col-4 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="zip" type="text" id="zip" class="form-control" mask="00000-000" (change)="searchZip($event)"/>
+      <label mdbLabel class="form-label" for="zip">CEP</label>
+    </mdb-form-control>
+  </div>
+  <div class="col-8"></div>
+  <div class="col-8 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="addressline" type="text" id="addressline" class="form-control"/>
+      <label mdbLabel class="form-label" for="addressline">Logradouro</label>
+    </mdb-form-control>
+  </div>
+  <div class="col-4 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="streetNumber" type="streetNumber" id="streetNumber" class="form-control"/>
+      <label mdbLabel class="form-label" for="streetNumber">Número</label>
+    </mdb-form-control>
+  </div>
+  <div class="col-4 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="complement" type="text" id="complement" class="form-control"/>
+      <label mdbLabel class="form-label" for="complement">Complemento</label>
+    </mdb-form-control>
+  </div>
+  <div class="col-8 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="district" type="text" id="district" class="form-control"/>
+      <label mdbLabel class="form-label" for="district">Bairro</label>
+    </mdb-form-control>
+  </div>
+  <div class="col-7 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="city" type="text" id="city" class="form-control"/>
+      <label mdbLabel class="form-label" for="city">Cidade</label>
+    </mdb-form-control>
+  </div>
+  <div class="col-5 mb-3">
+    <mdb-form-control>
+      <input mdbInput formControlName="state" type="text" id="state" class="form-control"/>
+      <label mdbLabel class="form-label" for="state">Estado</label>
+    </mdb-form-control>
+  </div>
+</form>

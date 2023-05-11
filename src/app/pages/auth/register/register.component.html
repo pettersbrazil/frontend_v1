@@ -1,0 +1,63 @@
+<section id="register">
+
+  <app-alert
+      [hidden]="!isAlert"
+      [status]="status"
+      [message]="message"
+  ></app-alert>
+  <app-loading
+    [hidden]="!isLoading"
+  ></app-loading>
+
+  <h4 class="mb-4">
+    Registrar
+  </h4>
+
+  <form [hidden]="!isForm" [formGroup]="registerForm" (keyup.enter)="onSubmit()">
+    <mdb-form-control class="mb-3">
+      <input mdbInput formControlName="name" type="text" id="name" class="form-control"/>
+      <label mdbLabel class="form-label" for="name">Nome</label>
+    </mdb-form-control>
+
+    <mdb-form-control class="mb-3">
+      <input mdbInput formControlName="email" type="email" id="email" class="form-control"/>
+      <label mdbLabel class="form-label" for="email">E-mail</label>
+    </mdb-form-control>
+
+    <mdb-form-control class="mb-3">
+      <input mdbInput formControlName="password" type="password" id="password" class="form-control"/>
+      <label mdbLabel class="form-label" for="password">Senha</label>
+    </mdb-form-control>
+
+    <mdb-form-control class="mb-3">
+      <input mdbInput formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control"/>
+      <label mdbLabel class="form-label" for="confirmPassword">Confirmar Senha</label>
+    </mdb-form-control>
+
+    <div class="form-check mt-2 mb-4">
+      <input
+        mdbCheckbox
+        formControlName="checkbox"
+        class="form-check-input"
+        type="checkbox"
+        id="flexCheckDefault"
+      />
+      <span>
+        Concordo com o <a [routerLink]="['/termos-de-uso']" target="_blank">Termos de Uso</a> e <a [routerLink]="['/politica-de-privacidade']" target="_blank">Política de Privacidade</a>.
+      </span>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [disabled]="registerForm.invalid || !registerForm.value.checkbox"
+      (click)="onSubmit()"
+    >cadastrar</button>
+  </form>
+
+  <div class="row mt-5" [hidden]="!dataRegister.isModal">
+    <p>
+        Ao em vez disso faça <a href="javascript:void(0);" (click)="login()">login</a>.
+    </p>
+  </div>
+</section>
