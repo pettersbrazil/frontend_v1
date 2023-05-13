@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
@@ -25,7 +26,11 @@ import { AppComponent } from "./app.component";
   ],
   providers: [
     AuthInterceptorProvider,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
   ],
   bootstrap: [AppComponent],
 })
