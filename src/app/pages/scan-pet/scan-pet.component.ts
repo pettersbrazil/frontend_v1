@@ -120,7 +120,7 @@ export class ScanPetComponent implements OnInit {
           this.getPet();
           this.getCurrentLocation();
         } else {
-          this.router.navigate(['/escanear', this.tagId]);
+          this.router.navigate(['/vincular', this.code]);
         }
       },
       e => {
