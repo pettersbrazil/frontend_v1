@@ -17,6 +17,10 @@
                           Código
                           <span *ngIf="key =='codigo'">{{ reverse ? '▲' : '▼' }}</span>
                         </th>
+                        <th class="fw-bold" (click)="sort('codigo')">
+                          Código de Verificação
+                          <span *ngIf="key =='codigo'">{{ reverse ? '▲' : '▼' }}</span>
+                        </th>
                         <th class="fw-bold" (click)="sort('situacao')">
                           Situação
                           <span *ngIf="key =='situacao'">{{ reverse ? '▲' : '▼' }}</span>
@@ -34,6 +38,9 @@
                         </td>
                         <td>
                             {{ tag.code }}
+                        </td>
+                        <td>
+                            {{ tag.secret }}
                         </td>
                         <td>
                             <span
