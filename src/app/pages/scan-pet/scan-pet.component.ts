@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService } from 'src/app/core/services/address.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ContactService } from 'src/app/core/services/contact.service';
@@ -32,8 +32,12 @@ export class ScanPetComponent implements OnInit {
   isLoading: boolean = false;
   isAddress: boolean = false;
 
+  petNotFound: boolean = false;
+
   status!: string;
   message!: string;
+
+  code!: string;
 
   petId!: string;
   tagId!: string;
@@ -44,6 +48,7 @@ export class ScanPetComponent implements OnInit {
   addressValid: boolean = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private tagService: TagService,
@@ -56,8 +61,8 @@ export class ScanPetComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.petId = this.route.snapshot.paramMap.get('id') || '';
-    this.getPet();
+    this.code = this.route.snapshot.paramMap.get('id') || '';
+    this.getTag();
     this.getUser();
     this.createForm();
   }
@@ -95,11 +100,10 @@ export class ScanPetComponent implements OnInit {
       (p: any) => {
         this.pet = p.data;
         this.imageURL = this.pet?.avatar || this.imageURL;
-        this.getTag();
       },
       e => {
         this.alert({
-          status: e.status === 404 || e.status === 422 ? 'warning' : 'error',
+          status: e.status === 422 ? 'warning' : 'error',
           message: e.error.message
         });
       }
@@ -107,11 +111,17 @@ export class ScanPetComponent implements OnInit {
   }
 
   private getTag() {
-    this.tagService.findOne(this.petId, '', '')
+    this.tagService.findOne('', this.code, '')
     .subscribe(
       (t: any) => {
+        this.petId = t.data?.petId;
         this.tagId = t.data._id;
-        this.getCurrentLocation();
+        if (this.petId) {
+          this.getPet();
+          this.getCurrentLocation();
+        } else {
+          this.router.navigate(['/escanear', this.tagId]);
+        }
       },
       e => {
         this.alert({
