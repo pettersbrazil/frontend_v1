@@ -41,6 +41,7 @@ export class BindPetComponent implements OnInit {
   ngOnInit(): void {
     this.code = this.route.snapshot.paramMap.get('id') || '';
     this.createForm();
+    this.getTag();
   }
 
   createForm(): void {
@@ -70,6 +71,24 @@ export class BindPetComponent implements OnInit {
             message: 'Para continuar e vincular seu pet, você precisa se cadastrar ou fazer login, '
           });
           this.tagService.setTag(tag.data);
+        }
+      },
+      e => {
+        this.alert({
+          status: e.status === 404 || e.status === 422 ? 'warning' : 'error',
+          message: e.error.message
+        });
+      }
+    )
+  }
+
+  private getTag() {
+    this.tagService.findOne('', this.code, '')
+    .subscribe(
+      (tag: any) => {
+        const petId = tag.data.petId;
+        if (petId) {
+          this.router.navigate(['/perfil', petId]);
         }
       },
       e => {
