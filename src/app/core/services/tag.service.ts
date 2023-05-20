@@ -15,7 +15,7 @@ export class TagService {
     private http: HttpClient
   ) {}
 
-  setTag(tag: ITag) {
+  setTag(tag: ITag | null) {
     this.tag = tag;
   }
 
