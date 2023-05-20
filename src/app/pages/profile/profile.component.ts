@@ -82,7 +82,7 @@ export class ProfileComponent implements OnInit {
     this.scannerService.view(this.id)
     .subscribe(
       (s: any) => {
-        if (s.data) {
+        if (s.data.length) {
           this.petScan = this.validTutor();
           this.scannerService.setScanner(s.data);
         }
