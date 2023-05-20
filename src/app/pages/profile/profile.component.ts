@@ -15,6 +15,7 @@ import { IContact } from 'src/app/shared/interfaces/IContact.interface';
 import { IAddress } from 'src/app/shared/interfaces/IAddress.interface';
 import { IUser } from 'src/app/shared/interfaces/IUser.interface';
 import { Status } from 'src/app/core/utils/status';
+import { TagService } from 'src/app/core/services/tag.service';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
   petScan: boolean = false;
 
   id!: string;
+  tagId!: string;
   status!: string;
   message!: string;
 
@@ -51,6 +53,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private contactService: ContactService,
     private addressService: AddressService,
+    private tagService: TagService,
     private authService: AuthService,
     private route: ActivatedRoute,
     private utilStatus: Status
@@ -79,7 +82,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private getScanPet() {
-    this.scannerService.view(this.id)
+    this.scannerService.view(this.tagId)
     .subscribe(
       (s: any) => {
         if (s.data.length) {
@@ -103,7 +106,25 @@ export class ProfileComponent implements OnInit {
         this.pet = p.data;
         this.imageURL = this.pet?.avatar || this.imageURL;
         this.petService.setPet(this.pet);
+        this.getTag();
         this.getTutor();
+      },
+      e => {
+        this.alert({
+          status: e.status === 404 || e.status === 422 ? 'warning' : 'error',
+          message: e.error.message
+        });
+      }
+    )
+  }
+
+  private getTag() {
+    this.isLoading = true;
+    this.tagService.findOne(this.id, '', '')
+    .subscribe(
+      (tag: any) => {
+        this.tagId = tag.data._id;
+        this.getScanPet();
       },
       e => {
         this.alert({
@@ -123,7 +144,7 @@ export class ProfileComponent implements OnInit {
         this.tutor = t.data;
         this.getAddressTutor();
         this.getContactTutor();
-        this.getScanPet();
+        this.getTag();
       },
       e => {
         this.alert({
