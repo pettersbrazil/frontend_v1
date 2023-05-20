@@ -168,12 +168,13 @@ export class LoginComponent implements OnInit {
       status: 'active'
     };
 
-    this.tagService.update(tag._id, data)
+    this.tagService.update(tag.code, data)
     .subscribe(
       () => {
         this.isAlert = false;
         this.isLoading = false;
         this.modalAuth.close();
+        this.tagService.setTag(null);
         this.router.navigate(['/perfil', pet._id]);
       },
       e => {

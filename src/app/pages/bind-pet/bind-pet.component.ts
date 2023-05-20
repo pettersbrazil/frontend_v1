@@ -132,6 +132,7 @@ export class BindPetComponent implements OnInit {
       () => {
         this.isAlert = false;
         this.isLoading = false;
+        this.tagService.setTag(null);
         this.router.navigate(['/perfil', pet._id]);
       },
       e => {
