@@ -55,26 +55,22 @@ export class BindPetComponent implements OnInit {
     this.tagService.findOne('', this.code, this.bindPetForm.value.secret)
     .subscribe(
       (tag: any) => {
-        if (tag.data) {
-          if (this.authService.isLogged()) {
-            this.alert({
-              status: 'success',
-              message: 'Seu pingente, foi reconhecido. Você será redirecionado para cotinuar o cadastro do seu pet.'
-            });
-            setTimeout(() => {
-              this.bindPet();
-              this.isLoading = true;
-            }, 3000);
-          } else {
-            this.linkAuth = true;
-            this.alert({
-              status: 'success',
-              message: 'Para continuar e vincular seu pet, você precisa se cadastrar ou fazer login, '
-            });
-            this.tagService.setTag(tag.data);
-          }
+        if (this.authService.isLogged()) {
+          this.alert({
+            status: 'success',
+            message: 'Seu pingente, foi reconhecido. Você será redirecionado para cotinuar o cadastro do seu pet.'
+          });
+          setTimeout(() => {
+            this.bindPet();
+            this.isLoading = true;
+          }, 3000);
         } else {
-          this.router.navigate(['/nao-encontrado']);
+          this.linkAuth = true;
+          this.alert({
+            status: 'success',
+            message: 'Para continuar e vincular seu pet, você precisa se cadastrar ou fazer login, '
+          });
+          this.tagService.setTag(tag.data);
         }
       },
       e => {
@@ -90,9 +86,13 @@ export class BindPetComponent implements OnInit {
     this.tagService.findOne('', this.code, '')
     .subscribe(
       (tag: any) => {
-        const petId = tag.data.petId;
-        if (petId) {
-          this.router.navigate(['/perfil', petId]);
+        if (tag.data) {
+          const petId = tag.data.petId;
+          if (petId) {
+            this.router.navigate(['/perfil', petId]);
+          }
+        } else {
+          this.router.navigate(['/nao-encontrado']);
         }
       },
       e => {
