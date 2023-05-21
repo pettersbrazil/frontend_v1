@@ -100,6 +100,7 @@ export class ScanPetComponent implements OnInit {
       (p: any) => {
         this.pet = p.data;
         this.imageURL = this.pet?.avatar || this.imageURL;
+        this.getCurrentLocation();
       },
       e => {
         this.alert({
@@ -117,7 +118,6 @@ export class ScanPetComponent implements OnInit {
         this.petId = t.data?.petId;
         this.tagId = t.data._id;
         if (this.petId) {
-          this.getCurrentLocation();
           this.getPet();
         } else {
           this.router.navigate(['/vincular', this.code]);
@@ -159,7 +159,6 @@ export class ScanPetComponent implements OnInit {
       )
     } else {
       this.isAddress = true;
-      this.getCurrentLocation();
     }
   }
 
@@ -280,8 +279,6 @@ export class ScanPetComponent implements OnInit {
     };
 
     this.isLoading = true;
-
-    console.log(this.scanForm.invalid, isLogged, this.user?._id, this.pet?.userId);
 
     if (form && !this.user) {
       this.saveUser();
