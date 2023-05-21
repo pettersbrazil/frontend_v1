@@ -283,7 +283,7 @@ export class ScanPetComponent implements OnInit {
 
     if (form && !this.user) {
       this.saveUser();
-    } else if((!this.scanForm.invalid || !isLogged) && this.user._id !== this.pet.userId) {
+    } else if((!this.scanForm.invalid || !isLogged) && this.user?._id !== this.pet?.userId) {
       this.scannerService.create(dataScan)
       .subscribe(
         () => {
