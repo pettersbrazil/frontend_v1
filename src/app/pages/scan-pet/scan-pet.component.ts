@@ -115,12 +115,16 @@ export class ScanPetComponent implements OnInit {
     this.tagService.findOne('', this.code, '')
     .subscribe(
       (t: any) => {
-        this.petId = t.data?.petId;
-        this.tagId = t.data._id;
-        if (this.petId) {
-          this.getPet();
+        if (t.data) {
+          this.petId = t.data?.petId;
+          this.tagId = t.data._id;
+          if (this.petId) {
+            this.getPet();
+          } else {
+            this.router.navigate(['/vincular', this.code]);
+          }
         } else {
-          this.router.navigate(['/vincular', this.code]);
+            this.router.navigate(['/nao-encontrado']);
         }
       },
       e => {
