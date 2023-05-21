@@ -284,36 +284,41 @@ export class ScanPetComponent implements OnInit {
 
     this.isLoading = true;
 
-    if (form && !this.user) {
-      this.saveUser();
-    } else if((!this.scanForm.invalid || !isLogged) && this.user?._id !== this.pet?.userId) {
-      this.scannerService.create(dataScan)
-      .subscribe(
-        () => {
-          if (!form && (userId || addressId)) {
-            this.alert({
-              status: 'success',
-              message: 'Agradecemos por avisar o tutor! Iremos iremos contactá-lo e se necessário entraremos em contato com você.'
-            });
-          } else {
-            this.isLoading = false;
-            this.isAlert = false;
-          }
-        },
-        e => {
-          if (form) {
-            this.alert({
-              status: e.status === 404 || e.status === 422 ? 'warning' : 'error',
-              message: e.error.message
-            });
-          } else {
-            this.isLoading = false;
-            this.isAlert = false;
-          }
-        }
-      )
-    } else {
+    if (isLogged && this.user?._id === this.pet?.userId) {
       this.isLoading = false;
+      this.router.navigate(['/perfil', this.pet._id]);
+    } else {
+      if (form && !this.user) {
+        this.saveUser();
+      } else if(!this.scanForm.invalid) {
+        this.scannerService.create(dataScan)
+        .subscribe(
+          () => {
+            if (!form && (userId || addressId)) {
+              this.alert({
+                status: 'success',
+                message: 'Agradecemos por avisar o tutor! Iremos iremos contactá-lo e se necessário entraremos em contato com você.'
+              });
+            } else {
+              this.isLoading = false;
+              this.isAlert = false;
+            }
+          },
+          e => {
+            if (form) {
+              this.alert({
+                status: e.status === 404 || e.status === 422 ? 'warning' : 'error',
+                message: e.error.message
+              });
+            } else {
+              this.isLoading = false;
+              this.isAlert = false;
+            }
+          }
+        )
+      } else {
+        this.isLoading = false;
+      }
     }
   }
 
