@@ -117,8 +117,8 @@ export class ScanPetComponent implements OnInit {
         this.petId = t.data?.petId;
         this.tagId = t.data._id;
         if (this.petId) {
-          this.getPet();
           this.getCurrentLocation();
+          this.getPet();
         } else {
           this.router.navigate(['/vincular', this.code]);
         }
@@ -159,6 +159,7 @@ export class ScanPetComponent implements OnInit {
       )
     } else {
       this.isAddress = true;
+      this.getCurrentLocation();
     }
   }
 
@@ -264,6 +265,7 @@ export class ScanPetComponent implements OnInit {
   }
 
   private saveScan(data: any, form: boolean) {
+    const isLogged = this.authService.isLogged();
     const userId = data?.userId ? data?.userId : this.user?._id;
     const addressId = this.user ? JSON.parse(this.address)?._id : data?.addressId;
     const dataScan: IScanner = {
@@ -281,7 +283,7 @@ export class ScanPetComponent implements OnInit {
 
     if (form && !this.user) {
       this.saveUser();
-    } else if(!this.scanForm.invalid) {
+    } else if((!this.scanForm.invalid || !isLogged) && this.user._id !== this.pet.userId) {
       this.scannerService.create(dataScan)
       .subscribe(
         () => {
