@@ -1,6 +1,6 @@
 import { Observable, Subscriber } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PetService } from 'src/app/core/services/pet.service';
@@ -56,6 +56,7 @@ export class ProfileComponent implements OnInit {
     private tagService: TagService,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private utilStatus: Status
   ) {}
 
@@ -103,11 +104,15 @@ export class ProfileComponent implements OnInit {
     this.petService.show(this.id)
     .subscribe(
       (p: any) => {
-        this.pet = p.data;
-        this.imageURL = this.pet?.avatar || this.imageURL;
-        this.petService.setPet(this.pet);
-        this.getTag();
-        this.getTutor();
+        if (p.data) {
+          this.pet = p.data;
+          this.imageURL = this.pet?.avatar || this.imageURL;
+          this.petService.setPet(this.pet);
+          this.getTag();
+          this.getTutor();
+        } else {
+          this.router.navigate(['/nao-encontrado']);
+        }
       },
       e => {
         this.alert({
