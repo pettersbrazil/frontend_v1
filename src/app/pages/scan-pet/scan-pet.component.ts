@@ -281,6 +281,8 @@ export class ScanPetComponent implements OnInit {
 
     this.isLoading = true;
 
+    console.log(this.scanForm.invalid, isLogged, this.user?._id, this.pet?.userId);
+
     if (form && !this.user) {
       this.saveUser();
     } else if((!this.scanForm.invalid || !isLogged) && this.user?._id !== this.pet?.userId) {
