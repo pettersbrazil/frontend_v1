@@ -55,22 +55,26 @@ export class BindPetComponent implements OnInit {
     this.tagService.findOne('', this.code, this.bindPetForm.value.secret)
     .subscribe(
       (tag: any) => {
-        if (this.authService.isLogged()) {
-          this.alert({
-            status: 'success',
-            message: 'Seu pingente, foi reconhecido. Você será redirecionado para cotinuar o cadastro do seu pet.'
-          });
-          setTimeout(() => {
-            this.bindPet();
-            this.isLoading = true;
-          }, 3000);
+        if (tag.data) {
+          if (this.authService.isLogged()) {
+            this.alert({
+              status: 'success',
+              message: 'Seu pingente, foi reconhecido. Você será redirecionado para cotinuar o cadastro do seu pet.'
+            });
+            setTimeout(() => {
+              this.bindPet();
+              this.isLoading = true;
+            }, 3000);
+          } else {
+            this.linkAuth = true;
+            this.alert({
+              status: 'success',
+              message: 'Para continuar e vincular seu pet, você precisa se cadastrar ou fazer login, '
+            });
+            this.tagService.setTag(tag.data);
+          }
         } else {
-          this.linkAuth = true;
-          this.alert({
-            status: 'success',
-            message: 'Para continuar e vincular seu pet, você precisa se cadastrar ou fazer login, '
-          });
-          this.tagService.setTag(tag.data);
+          this.router.navigate(['/nao-encontrado']);
         }
       },
       e => {
