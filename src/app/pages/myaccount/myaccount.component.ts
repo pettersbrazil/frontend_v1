@@ -239,6 +239,8 @@ export class MyaccountComponent implements OnInit {
         } else {
           this.saveProfile(userId, message);
         }
+
+        if (user?.password) this.passwordForm.reset();
       },
       e => {
         this.alert({
