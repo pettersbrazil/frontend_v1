@@ -30,7 +30,7 @@ export class TagCreateComponent implements OnInit {
 
   createForm(): void {
     this.tagCreateForm = this.formBuilder.group({
-      quantity: ['', [Validators.required]]
+      quantity: ['', [Validators.required, Validators.pattern(/^[1-9][0-9]*$/)]]
     })
   }
 
